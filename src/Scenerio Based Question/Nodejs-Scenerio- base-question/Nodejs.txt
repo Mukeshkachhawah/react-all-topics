@@ -1,3 +1,5 @@
+NODEJS inteview question
+
 Question 1: Handling Multiple API Requests Simultaneously.
 Aapko ek API banani hai jo user ke order details aur payment history ko fetch karti hai. Dono endpoints ka response time alag-alag hai. Kaise ensure karenge ki API jaldi se jaldi response de?
 Answer : Is problem ko solve karne ke liye hum Promise.all ka use karenge jo dono requests ko ek saath asynchronously execute karega.
