@@ -1,0 +1,26 @@
+React Suspense ek feature hai jo React app me lazy loading aur asynchronous rendering ko handle karta hai , Yeh feature React ko better user experience dene ke liye design kiya gaya hai
+jisme app ki loading ko smooth banaya jaata hai, especially jab aapko data ya components ko fetch karna ho.
+
+React Suspense Kaam Kaise Karta Hai?
+1.Lazy Loading of Components: Jab aap kisi component ko lazy load karna chahte ho, to aap React.lazy() ka use karte ho. Agar yeh component abhi tak load nahi hua hai, to Suspense uske liye ek fallback UI dikhaata hai (jaise loading spinner ya placeholder), jab tak actual component load na ho jaaye.
+
+2.Data Fetching: Agar aap asynchronous operations (jaise API calls) kar rahe ho, to Suspense un operations ke complete hone tak ek fallback UI dikhaata hai, jisse user ko wait karte hue ek smooth experience milta hai.
+
+import React, { Suspense } from 'react';
+
+// Lazy load the component
+const MyComponent = React.lazy(() => import('./MyComponent'));
+
+function App() {
+  return (
+    <div>
+      <h1>Welcome to React Suspense!</h1>
+      {/* Wrap the lazy-loaded component with Suspense */}
+      <Suspense fallback={<div>Loading...</div>}>
+        <MyComponent />
+      </Suspense>
+    </div>
+  );
+}
+
+export default App;
