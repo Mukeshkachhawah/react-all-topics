@@ -1,0 +1,51 @@
+React Fiber is the new reconciliation engine in React, introduced from version 16. It improves the rendering process, making React faster, more flexible, and better at handling complex user interfaces.
+
+(React Fiber ek React.js ka naya reconciliation engine hai jo React v16 mein introduce kiya gaya tha. Iska main goal hai rendering performance ko improve karna aur user interface ko zyada smooth aur responsive banana.)
+
+Key Features of React Fiber:
+
+Incremental Rendering – React Fiber bade updates ko chhote-chhote parts mein todta hai taaki UI smooth bane.
+
+Priority-based Updates – Zyada important cheezon (jaise user input ya animations) ko pehle handle karta hai, baaki kam priority waale updates baad mein karta hai.
+
+Concurrency – Asynchronous rendering ka support deta hai, jisse app slow hone ke bajaye fast aur fluid lagti hai.
+
+Better Error Handling – Errors ko handle karne ke liye improved Error Boundaries ka use karta hai.
+
+
+Suspense – Data fetching ke liye suspense ka support deta hai, jisse loading states ko handle karne mein aasani ho jaati hai.
+
+import React, { useState, useTransition } from 'react';
+
+function App() {
+  const [input, setInput] = useState('');
+  const [list, setList] = useState([]);
+  const [isPending, startTransition] = useTransition();
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setInput(value);
+
+    // Start a transition for non-urgent updates
+    startTransition(() => {
+      const newList = Array.from({ length: 5000 }, (_, index) => value + index);
+      setList(newList);
+    });
+  };
+
+  return (
+    <div>
+      <input type="text" value={input} onChange={handleChange} />
+      {isPending && <p>Loading...</p>}
+      <ul>
+        {list.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+useTransition Fiber ka ek part hai jo low-priority updates ko background me handle karta hai, jisse UI responsive lagti hai.
+
+startTransition function me expensive updates ko asynchronous way me kiya jaata hai, jisse UI input field ke type karte samay freeze nahi hoti.

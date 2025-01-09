@@ -1,0 +1,11 @@
+Reconciliation React ka ek process hau jisme Virtual Dom ka use krke real dom ko efficiently update kiyaa jaata hai. jab React me koi change hota hai (jaise state ya props update hote hain), to react purani dom tree ko nyi dom tree ke sath compate krta hai  aur sirf whi changes real DOM me apply krta hai jo jaroori hote hai . is process ko hi Reconciliation khte hai
+
+Reconciliation kese kam krata hai -----?
+1. React pahle ek Virtual dom bnata hai , jo ek lightweight copy hota hai real DOM ka.
+2. Jab koi state ya props change hote hain, React ek nayi Virtual DOM tree banata hai.
+3. Diffing algorithm ka use krke React purani aur nayi tree ka comparition karta hai 
+4. jo nodes diffrente hote hai , sirf whi real dom me update kiye jaate hai
+5. is tarike se react ka ui fast and efficient rhate hai
+
+Example:
+Agar tum ek list of items ko render karte ho, aur sirf ek item update hota hai, to React pura list render nahi karta. Sirf wahi item update hota hai jo badla gaya hai.

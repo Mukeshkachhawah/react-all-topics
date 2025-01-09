@@ -1,0 +1,21 @@
+Diffing Algorithm React ka ek process hai jo Virtual DOM ko real DOM ke saath compare karta hai, taaki React sirf unhi parts ko update kare jo actually change hue hain. Iska main goal hai ki performance optimize ki jaaye aur unnecessary re-renders ko avoid kiya jaaye.
+
+Diffing Algorithm Ki Strategy:
+Element Type Matching: Agar parent element ka type change hota hai (jaise div se span me), to React puri tarah se us element ko replace kar deta hai.
+
+Key Prop: Agar aap list render kar rahe ho aur har item ko ek unique key prop de rahe ho, to React efficiently match karta hai old aur new list ko. Agar key same hai to React us item ko update karta hai, agar key change hoti hai to puri list re-render hoti hai.
+
+Recursive Comparison: Agar ek component ke andar nested components hain, to React un components ko recursively compare karta hai aur unme changes ko efficiently apply karta hai.
+
+Example:
+Maan lo ek list hai jisme items add/hide hote hain. Agar tum key prop ka use karte ho, to jab koi item add ya remove hota hai, React sirf us item ko update karega, puri list ko nahi.
+
+<ul>
+  {items.map(item => (
+    <li key={item.id}>{item.name}</li>
+  ))}
+</ul>
+
+Without key: Agar tum key nahi dete, to React har item ko puri tarah se re-render karega, jo performance ko slow kar sakta hai.
+
+With key: Agar tum key prop use karte ho, to React ko pata hota hai kaunsa item kis position pe hai aur uss position ko efficiently update karta hai.
