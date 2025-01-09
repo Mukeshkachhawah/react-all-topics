@@ -1,0 +1,18 @@
+Strict Mode React ka ek built-in component hai jo aapki application me potential problems detect karne ke liye use hota hai. Yeh sirf development mode me kaam karta hai, production me iska koi impact nahi hota. Strict Mode ka use aapki code quality aur future updates ke liye app ko better banane ke liye kiya jata hai.
+
+React Strict Mode Ka Use:
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+1. Unsafe lifecycle methods detect karta hai: Deprecated lifecycle methods jaise componentWillMount, componentWillReceiveProps par warning deta hai.
+2. Side effects detect karta hai: useEffect ke andar side effects ko double call karta hai development me, taaki bugs pakde ja sake.
+3. String refs ka use detect karta hai: String refs ko discourage karta hai aur React.createRef() ko recommend karta hai.
+4. Legacy Context API warn karta hai: Naya context API use karne ka suggestion deta hai.
