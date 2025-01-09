@@ -1,0 +1,49 @@
+Static Routing (Predefined Routes):
+Static routing ka means he aap apni app routes pehke se define kar dete ho , aur wo kabhi change nhi hote hai . Har url ek specific component ya page ke sath map hota hai, app me ek fixed structure maintain krta hai 
+
+import {BrowseRouter as Router , Routes, Route } from 'react-router-dom'
+import Home from './Home'
+import About from './About'
+
+funtion App(){
+    return (
+        <>
+        <Router>
+                <Routes>
+                    <Route path="/home" element={<Home/>}/>
+                    <Route path="/about" element={<About/>}/>
+                </Routes>
+        </Router>
+        </>
+    )
+}
+
+Features:
+Fixed structure.
+Routes ko manually define kiya jata hai.
+Page refresh karne pe route change hota hai.
+
+Dynamic Routing (Generated at Runtime)
+Dynamic routing ka matlab hai ki routes ko runtime par dynamically handle kiya jata hai. Yaha routing ka structure dynamic data par based hota hai, jaise user ID, post ID, etc. Isme URL parameter ka use hota hai
+
+import { BrowserRouter as Router, Route, Routes, useParams } from 'react-router-dom';
+funtion UserProfile(){
+    const {userId} = useParams();
+    return <h1>User Profile for User ID: {userId}</h1>
+}
+
+funtion App(){
+    return(
+        <Router>
+                <Routes>
+                    <Route path="/user/:userId" element={<UserProfile/>}/>
+                </Routes>    
+        </Router>
+    )
+}
+
+
+Features:
+Routes runtime par generate hote hain.
+URL parameters ke through dynamic data handle kiya jata hai.
+No need to reload the page (SPA behavior).

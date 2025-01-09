@@ -19,6 +19,7 @@ function App() {
       <Suspense fallback={<div>Loading...</div>}>
         <MyComponent />
       </Suspense>
+      
     </div>
   );
 }
