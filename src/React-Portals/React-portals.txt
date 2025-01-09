@@ -1,0 +1,20 @@
+React Portals ek aisa feature he jo react ke component ko dom ke bahar bhi render karne ki suveedha deta hai, iska use tab hota hai jab aapko ek component ko ek diffrent part of the dom me render karna ho , jaise model , tooltip , dropdown , yaa notification , jo parent component ke hierarchy ke bhahar ho  
+
+React Portals ka Use Case:
+Normal React components ko parent component ke andar hi render kiya jata hai, lekin kabhi-kabhi aapko koi element ko parent ke bahar render karna padta hai (for example, modals). React portals is case me kaam aate hain.
+
+Kaise Kaam Karte Hai?
+Portal basically rendering ka ek tarika hai jisme aap ek component ko ek different DOM node me render kar sakte hain, bina component hierarchy ko break kiye.
+
+Syntax : ReactDOM.createPortal(child, container)
+child: Wo component ya element jo render karna hai.
+container: Jaha us component ko render karna hai (typically ek DOM element outside the parent component).
+
+React Portals ke Benefits:
+
+DOM Tree se Bahar Rendering: Agar aapko kisi component ko uske parent component ke bahar render karna ho, to portals bahut useful hote hain.
+
+CSS Styling: Portal use karte waqt aapko component ko alag se style kar sakte ho, jise aap easily manage kar sakte hain.
+
+Event Handling: Portals ka use karne se event propagation (like click events) parent component ke bahar bhi easily handle kiya ja sakta hai.
+
