@@ -76,3 +76,4 @@ Uncontrolled components jab custom logic implement karna hai aur form submission
 | Flexibility   | Zyada flexible, easy validation | Simple, limited control |
 +---------------+-------------------------+------------------------+
 
+In most modern React applications, controlled components preferred hote hain kyunki ye data consistency aur better state management provide karte hain.

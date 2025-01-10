@@ -1,0 +1,6 @@
+Concurrent Rendering in React ek feature hai jo React ko UI rendering ko zyada smoothly aur efficiently handle karne ka mauka deta hai. Ye feature React 18 me introduce kiya gaya, jisme React synchronous aur asynchronous rendering ke beech balance bana sakta hai.
+
+Concurrent Rendering Kya Hai?
+Concurrent rendering ka matlab hai ki React ek hi samay par multiple updates ko pause, resume, aur cancel kar sakta hai, jisse faster user interactions aur better performance milti hai. Ye synchronous rendering (jo React 17 tak hoti thi) se alag hai, kyunki usme har render cycle ko complete karna padta tha, chahe wo kitna bhi time le.
+
+
