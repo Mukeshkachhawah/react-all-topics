@@ -1,4 +1,4 @@
-Controlled components wo components hote hain jo React state ke control mein hote hain. Input ka value state se bind hota hai, aur har update React ke state ko modify karta hai.
+1. Controlled components wo components hote hain jo React state ke control mein hote hain. Input ka value state se bind hota hai, aur har update React ke state ko modify karta hai.
 
 import React, { useState } from "react";
 
@@ -26,3 +26,29 @@ onChange event handler ke through state update hoti hai.
 Fayde:
 Input ka har update React ke state ke sath sync hota hai, isse data consistent rehta hai.
 Form validation aur input processing asaan hoti hai.
+
+2. Uncontrolled Components :
+Uncontrolled components me input field ka data directly DOM se manage kiya jata hai, aur React state ka use nahi hota.
+
+import React, { useRef } from "react";
+
+function UncontrolledComponent() {
+  const inputRef = useRef(null);
+
+  const handleSubmit = () => {
+    alert(`Entered value: ${inputRef.current.value}`); // Directly DOM se value access ki gayi
+  };
+
+  return (
+    <div>
+      <input type="text" ref={inputRef} />
+      <button onClick={handleSubmit}>Submit</button>
+    </div>
+  );
+}
+
+export default UncontrolledComponent;
+
+Key Points:
+useRef ka use hota hai direct DOM element ko access karne ke liye.
+Input ka value React ke state se nahi, DOM ke reference se milta hai.
