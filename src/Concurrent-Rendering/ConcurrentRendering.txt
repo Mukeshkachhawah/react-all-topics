@@ -1,0 +1,42 @@
+Concurrent Rendering in React ek feature hai jo React ko UI rendering ko zyada smoothly aur efficiently handle karne ka mauka deta hai. Ye feature React 18 me introduce kiya gaya, jisme React synchronous aur asynchronous rendering ke beech balance bana sakta hai.
+
+Concurrent Rendering Kya Hai?
+Concurrent rendering ka matlab hai ki React ek hi samay par multiple updates ko pause, resume, aur cancel kar sakta hai, jisse faster user interactions aur better performance milti hai. Ye synchronous rendering (jo React 17 tak hoti thi) se alag hai, kyunki usme har render cycle ko complete karna padta tha, chahe wo kitna bhi time le.
+
+
+Benefits of Concurrent Rendering
+Responsive UI:
+React high-priority tasks (jaise user input) ko low-priority tasks (jaise background data fetching) se alag kar sakta hai.
+Example: Agar koi typing kar raha hai aur ek heavy component load ho raha hai, to typing lag nahi karega.
+
+Suspense for Data Fetching:
+Suspense ka use asynchronous data ko load karte waqt placeholders dikhane ke liye kiya jata hai.
+
+Interruptible Rendering:
+Rendering ko pause karna aur resume karna possible hai, agar koi high-priority action perform hota hai.
+
+Example :
+import React, { useState, useTransition } from "react";
+
+function ConcurrentExample() {
+  const [isPending, startTransition] = useTransition();
+  const [count, setCount] = useState(0);
+
+  const handleClick = () => {
+    startTransition(() => {
+      setCount((prev) => prev + 1);  // Low-priority update
+    });
+  };
+
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={handleClick} disabled={isPending}>
+        Increment
+      </button>
+      {isPending && <p>Updating...</p>}
+    </div>
+  );
+}
+
+export default ConcurrentExample;
