@@ -1,0 +1,28 @@
+Controlled components wo components hote hain jo React state ke control mein hote hain. Input ka value state se bind hota hai, aur har update React ke state ko modify karta hai.
+
+import React, { useState } from "react";
+
+function ControlledComponent() {
+  const [name, setName] = useState("");
+
+  const handleChange = (e) => {
+    setName(e.target.value); // Input ka value state se control ho raha hai
+  };
+
+  return (
+    <div>
+      <input type="text" value={name} onChange={handleChange} />
+      <p>Your name is: {name}</p>
+    </div>
+  );
+}
+
+export default ControlledComponent;
+
+Key Points:
+Input ka value state se control hota hai.
+onChange event handler ke through state update hoti hai.
+
+Fayde:
+Input ka har update React ke state ke sath sync hota hai, isse data consistent rehta hai.
+Form validation aur input processing asaan hoti hai.

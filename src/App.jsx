@@ -29,7 +29,7 @@ const App = () => {
           rej(error);
         });
     });
-
+ 
     apiData
       .then((data) => {
         console.log(data);

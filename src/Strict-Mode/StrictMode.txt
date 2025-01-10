@@ -12,7 +12,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </React.StrictMode>
 );
 
+
 1. Unsafe lifecycle methods detect karta hai: Deprecated lifecycle methods jaise componentWillMount, componentWillReceiveProps par warning deta hai.
 2. Side effects detect karta hai: useEffect ke andar side effects ko double call karta hai development me, taaki bugs pakde ja sake.
 3. String refs ka use detect karta hai: String refs ko discourage karta hai aur React.createRef() ko recommend karta hai.
 4. Legacy Context API warn karta hai: Naya context API use karne ka suggestion deta hai.
+
