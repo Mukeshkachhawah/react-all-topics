@@ -52,3 +52,13 @@ export default UncontrolledComponent;
 Key Points:
 useRef ka use hota hai direct DOM element ko access karne ke liye.
 Input ka value React ke state se nahi, DOM ke reference se milta hai.
+
+Fayde:
+Simple aur lightweight implementation.
+Form submission aur validation ke liye custom logic implement karne me asaan hota hai.
+
+Comparison:
+Controlled components me data React ke state se control hota hai, aur uncontrolled components me data directly DOM se manage kiya jata hai.
+
+Nuksan:
+State ke sath sync nahi hota, isse data manage karna mushkil ho sakta hai.
