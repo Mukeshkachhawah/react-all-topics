@@ -1,0 +1,74 @@
+React ke saath Redux Saga aur Redux Thunk dono ka use hota hai asynchronous actions ko handle karne ke liye, lekin dono me kaafi differences hain.
+
+1. Redux Thunk
+Thunk ek middleware hai jo action creators me asynchronous logic likhne ki permission deta hai. Ye directly dispatch function ka access deta hai.
+// Action using Thunk
+export const fetchData = () => {
+  return async (dispatch) => {
+    dispatch({ type: 'FETCH_REQUEST' });
+    try {
+      const response = await fetch('https://api.example.com/data');
+      const data = await response.json();
+      dispatch({ type: 'FETCH_SUCCESS', payload: data });
+    } catch (error) {
+      dispatch({ type: 'FETCH_FAILURE', error });
+    }
+  };
+};
+
+Explanation:
+
+dispatch({ type: 'FETCH_REQUEST' }) — Loading state handle karta hai.
+fetch async data ko load karta hai.
+Success aur failure ke liye alag actions hain.
+
+2.Redux Saga
+Redux Saga ek middleware hai jo generators ka use karta hai complex async logic ke liye, jaise retries, debounce, aur background tasks.
+import { call, put, takeEvery } from 'redux-saga/effects';
+
+// Worker saga
+function* fetchDataSaga() {
+  try {
+    const response = yield call(fetch, 'https://api.example.com/data');
+    const data = yield response.json();
+    yield put({ type: 'FETCH_SUCCESS', payload: data });
+  } catch (error) {
+    yield put({ type: 'FETCH_FAILURE', error });
+  }
+}
+
+// Watcher saga
+function* watchFetchData() {
+  yield takeEvery('FETCH_REQUEST', fetchDataSaga);
+}
+
+export default watchFetchData;
+
+Explanation:
+takeEvery har FETCH_REQUEST action ko observe karta hai.
+call async function call karta hai.
+put new action dispatch karta hai.
+
+Redux Thunk vs Redux Saga (Comparison Table)
+
++-------------------+---------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| Feature           | Redux Thunk                                                                                             | Redux Saga                                                                                         |
++-------------------+---------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| Implementation    | Functions ka use hota hai jo `dispatch` aur `getState` ko directly access karti hain.                   | Generator functions ka use hota hai, jo `yield` syntax ka istemal karti hain.                    |
++-------------------+---------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| Syntax Simplicity | Simple aur easy to understand syntax.                                                                    | Thoda complex syntax, especially beginners ke liye.                                                |
++-------------------+---------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| Async Handling    | Action creators me async functions likhne ki facility deta hai.                                          | Actions ko listen karta hai aur asynchronous workflows handle karta hai (background jobs, retries, etc.). |
++-------------------+---------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| Best Use Case     | Simple API requests, data fetching, ya form submission jaise tasks ke liye.                             | Multiple dependent API requests, complex side-effects, aur real-time data handling ke liye.      |
++-------------------+---------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| Middleware Size   | Lightweight, small codebase.                                                                             | Relatively larger middleware with more functionality.                                            |
++-------------------+---------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| Complex Workflows | Complex logic (debounce, retries) manage karna mushkil ho sakta hai.                                      | Advanced control with features like retry, cancel, debounce, and sequencing.                      |
++-------------------+---------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| Learning Curve    | Easy to learn aur implement karna simple hai.                                                            | Steeper learning curve due to generators and more abstract syntax.                                |
++-------------------+---------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| Dependencies      | Sirf `redux-thunk` dependency ki zarurat.                                                                | `redux-saga` aur `@redux-saga/core` jaise packages ki zarurat hoti hai.                          |
++-------------------+---------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| Action Flow       | Synchronous aur asynchronous actions dono handle karta hai, but with basic flow.                        | Action flow ko better manage karta hai aur complex async logic ke liye zyada suited hai.         |
++-------------------+---------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------+
