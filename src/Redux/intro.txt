@@ -1,0 +1,29 @@
+Redux ek state management library hai jo aapko apne JavaScript apps mein application state ko manage karne mein madad karti hai. Redux mainly React apps ke saath use hoti hai, lekin aap ise kisi bhi JavaScript framework ya library ke saath use kar sakte hain. Redux ka main purpose hai application ke state ko ek central location par store karna aur usse efficiently update karna.
+
+What is Redux?
+
+Redux ek predictable state container hai. Iska matlab hai ki Redux ke through aap apne app ka state ek central place par rakhte hain, jahan se aap easily access aur update kar sakte hain.
+
+Redux 3 main principles par based hai:
+1.Single Source of Truth
+Redux mein, app ka state ek single store mein rakha jata hai. Isse yeh ensure hota hai ki app ke poore state ko ek centralized location se manage kiya jaye.
+
+2.State is Read-Only
+Aap state ko directly modify nahi kar sakte. Agar aapko state ko update karna hai, toh aapko ek action dispatch karna padega jo state ko update karega.
+
+3.Changes are Made with Pure Functions
+State ko update karne ka kaam reducers karte hain, jo pure functions hote hain. Yeh functions app ka current state aur action ko lete hain, aur ek naya state return karte hain without modifying the existing state.
+
+When and Why Use Redux?
+When----->
+->Complex State Management: Jab aapka application ka state complex ho jata hai (e.g., multiple nested components), toh Redux use karna helpful ho sakta hai.
+->Multiple Components Need Access to State: Agar aapke multiple components ek hi state ko share kar rahe hain, toh Redux ka use aapko is state ko efficiently manage karne mein madad karega.
+->Non-UI State Needs to Be Shared: Jab aapko app ke state ko non-UI purposes ke liye (e.g., authentication status, user data, etc.) share karna ho.
+
+
+Why Use Redux?
+->Centralized State Management: Redux ki madad se aap apne app ka state ek single store mein rakhte hain, jahan se wo easily accessible ho jata hai aur aapko manually state ko pass karne ki zaroorat nahi padti.
+->Predictability: Redux mein aapke actions aur reducers define hote hain, isliye state ka flow predict ho sakta hai. Agar koi bug hai toh aap easily trace kar sakte hain ki kis action ne state ko change kiya hai.
+->Easier Debugging: Redux DevTools ka use karke aap easily apne app ka state track kar sakte hain. Aap dekh sakte hain ki kis action ne state ko change kiya aur aap previous states ko bhi explore kar sakte hain.
+->Better Testing: Redux ka state management kaafi predictable aur isolated hota hai, jo ki testing ko aasan banata hai. Reducers ko test karna straightforward hota hai.
+
