@@ -1,0 +1,75 @@
+1. Basic Authentication (Username & Password)
+Description: Simple authentication system jisme user apna username aur password deta hai. Backend ko request bheji jati hai, aur agar credentials match karte hain toh access diya jata hai.
+
+Flow:
+User apna username aur password input karta hai.
+Backend ko request bheji jati hai.
+Agar credentials valid hain, toh backend JWT (JSON Web Token) ya session token send karta hai.
+Frontend mein token ko store karke protected routes access kiye jate hain.
+
+Security Considerations: Token ko securely store karna zaroori hota hai, usually localStorage ya sessionStorage mein. Sensitive information jaise password ko encrypted form mein store karna hota hai.
+
+2. JWT Authentication (JSON Web Token)
+Description: JWT ek popular method hai authentication ke liye. User ko login karne ke baad ek JWT token diya jata hai, jo aage ki requests ke liye use hota hai.
+
+Flow:
+1.User login karta hai.
+2.Backend JWT token generate karta hai aur frontend ko bhejta hai.
+3.Frontend us token ko localStorage ya sessionStorage mein store karta hai.
+4.Har request mein token ko headers mein send kiya jata hai backend ko for authentication.
+
+Security Considerations: JWT ka expiry time set karna zaroori hota hai, aur refresh tokens ka use bhi kiya jata hai taaki session expire na ho.
+
+3.OAuth Authentication (Social Login):
+Description: OAuth ek authorization framework hai jo third-party providers (Google, Facebook, GitHub, etc.) ke through authentication allow karta hai. Isme user apne existing social media account se login karta hai.
+
+Flow:
+1.User Google, Facebook, ya kisi bhi provider ke through login karta hai.
+2.OAuth provider user ko authentication token deta hai.
+3.Backend ko token send kiya jata hai.
+4.Backend token ko verify karta hai aur agar valid hai toh user ko authenticated access milta hai.
+
+Security Considerations: OAuth mein access tokens aur refresh tokens kaafi important hote hain. Token expiry aur revocation ka dhyan rakhna hota hai.
+
+4. Session-based Authentication:
+Description: Is method mein authentication session create ki jati hai jab user login karta hai. Session ID ko server side store kiya jata hai aur client side pe cookies ke through track kiya jata hai.
+
+Flow:
+1.User login karta hai.
+2.Backend ek session create karta hai aur session ID ko client ko cookies ke through bhejta hai.
+3.Har request mein client cookies mein session ID send karta hai.
+4.Backend session ID ko verify karta hai aur authenticated user ko access deta hai.
+
+Security Considerations: Cookies ko secure aur HTTP-only set karna zaroori hota hai. CSRF (Cross-Site Request Forgery) attack se bachne ke liye additional precautions lene padte hain.
+
+5. Multi-Factor Authentication (MFA):
+Description: MFA mein ek additional layer of security add ki jati hai jisme user ko apni identity verify karne ke liye do ya usse zyada factors dene padte hain, jaise OTP (One-Time Password), fingerprint, etc.
+
+Flow:
+1.User login karta hai with username aur password.
+2.Backend OTP ya second factor send karta hai user ko.
+3.User us OTP ko enter karta hai.
+4.Agar correct OTP hai, toh user ko access mil jata hai.
+
+Security Considerations: MFA security ko boost karta hai, lekin yeh user experience ko thoda complex bana sakta hai.
+
+6.Single Sign-On (SSO):
+Description: SSO ek authentication process hai jisme user ek baar login karta hai aur uske baad multiple applications ya services ko bina dobara login kiye access kar sakta hai.
+
+Flow:
+1.User ek service ya application pe login karta hai.
+2.SSO provider ke through authentication hota hai.
+3.User ko baaki applications ya services ke liye dobara login karne ki zarurat nahi padti.
+
+Security Considerations: SSO ko implement karte waqt security measures (like token expiry) kaafi zaroori hote hain.
+
+7.Biometric Authentication
+Description: Biometric authentication mein user apne fingerprint, face recognition, ya iris scan ka use karke login karta hai.
+
+Flow:
+1.User apni biometric details enter karta hai.
+2.Device ya system user ki biometric details ko verify karta hai.
+3.Agar match hota hai, toh user ko access mil jata hai.
+
+Security Considerations: Biometrics ko securely store karna zaroori hai, aur unki protection ke liye strong encryption ka use karna chahiye.
+

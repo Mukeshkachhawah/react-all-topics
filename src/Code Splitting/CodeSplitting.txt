@@ -1,7 +1,7 @@
 Code splitting in React ek technique hai jisme aap apne application ke code ko multiple bundles me divide karte hain. Isse page load speed improve hoti hai kyunki browser ko poora JavaScript bundle load karne ki zarurat nahi hoti. Sirf wohi code load hota hai jo page pe visible hai.
 
 React me code splitting ko implement karne ke liye dynamic imports ka use kiya jata hai. Ye technique especially large applications me kaafi helpful hoti hai, jahan aapko saare components ek hi baar load nahi karne chahiye.
-
+             
 Code Splitting ka Concept
 1. Initial Bundle: Jab React application load hota hai, toh ek initial JavaScript bundle hota hai jo sabhi components ko contain karta hai.
 2. Split Bundles: Code splitting ke through, aap is bundle ko chhote-chhote parts me divide kar sakte hain, jise chunks kaha jata hai.
