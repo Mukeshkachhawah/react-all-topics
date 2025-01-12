@@ -1,0 +1,128 @@
+React me Mounting, Updating, aur Unmounting phases hote hain. Har phase mein specific lifecycle methods (class components) ya hooks (functional components) hote hain, jo aapko component ke different stages par code execute karne ka mauka dete hain. Aaiye in sab phases ko Hinglish mein samjhte hain:
+
+1. Mounting
+Mounting ka matlab hota hai jab ek component pehli baar DOM (Document Object Model) mein render hota hai.
+Lifecycle Methods in Mounting Phase (Class Components):
+1.constructor(): Yeh pehla method hai jo component banate waqt call hota hai. Ismein aap initial state set kar sakte ho ya props ko initialize kar sakte ho.
+2.static getDerivedStateFromProps(): Yeh method render hone se pehle call hota hai, aur state ko props ke according update karta hai.
+3.render(): Yeh method component ko render karta hai, jo final UI return karta hai.
+componentDidMount(): Yeh method component ke render hone ke baad call hota hai. Aap side effects (e.g., API calls) yahan perform kar sakte ho.
+
+
+Using Hooks (Functional Components):
+useEffect(): Functional components mein useEffect hook ka use hota hai, jo component mount hone par side effects handle karta hai.
+Agar aap empty dependency array [] dete ho, to yeh hook component mount hone ke baad ek baar execute hota hai (jaise componentDidMount in class components).
+
+Example (Class Component) - Mounting:
+import React, { Component } from 'react';
+class MyComponent extends Component {
+  constructor(props) {
+    super(props);
+    console.log('Constructor: Component is being created');
+  }
+
+  componentDidMount() {
+    console.log('componentDidMount: Component has been mounted');
+  }
+
+  render() {
+    return <div>My Component</div>;
+  }
+}
+
+export default MyComponent;
+
+Example (Functional Component) - Mounting with useEffect:
+
+import React, { useEffect } from 'react';
+
+const MyComponent = () => {
+  useEffect(() => {
+    console.log('useEffect: Component has been mounted');
+  }, []); // Empty array means this will run once when the component mounts.
+
+  return <div>My Component</div>;
+};
+
+export default MyComponent;
+
+
+2. Updating
+
+Updating phase tab hota hai jab component ki state ya props change hoti hain aur React component ko dobara render karta hai.
+Lifecycle Methods in Updating Phase (Class Components):
+
+• static getDerivedStateFromProps(): 
+  - Agar props change hoti hain to yeh method call hota hai aur state ko update karta hai.
+
+• shouldComponentUpdate(): 
+  - Is method ka use React ko batane ke liye hota hai ki component ko dobara render karna chahiye ya nahi. Yeh performance optimization ke liye hota hai.
+
+• render(): 
+  - Jab component update hota hai, render() method dobara call hota hai, jo UI ko update karta hai.
+
+• getSnapshotBeforeUpdate(): 
+  - Yeh method render() ke baad call hota hai, lekin DOM update hone se pehle. Yeh DOM se related information ko capture karta hai.
+
+• componentDidUpdate(): 
+  - Yeh method component ke render hone ke baad call hota hai. Yahan aap side effects (e.g., API calls) kar sakte ho.
+
+ Using Hooks (Functional Components):
+• useEffect(): 
+  - Agar aap dependencies specify karte ho, to useEffect update hone par (state ya props ke change hone par) execute hota hai.
+
+
+Unmounting:
+• Unmounting phase tab hota hai jab component DOM se remove hota hai. Is phase mein, aapko cleanup karna hota hai, jaise event listeners ko remove karna, timers ko clear karna, ya network requests ko cancel karna.
+
+Lifecycle Method in Unmounting Phase (Class Components):
+
+• componentWillUnmount(): 
+  - Yeh method component ke unmount hone se pehle call hota hai. Ismein aapko cleanup actions perform karne hote hain, jaise timers ya subscriptions ko clear karna.
+
+Using Hooks (Functional Components):
+• useEffect(): 
+  - useEffect mein, agar aap cleanup karna chahte hain to return ek function jo cleanup ko handle kare. Yeh cleanup function component ke unmount hone se pehle call hota hai.
+
+
+React Lifecycle Phases (Mounting, Updating, Unmounting)
+
+| **Phase**    | **Class Components Methods**                                          | **Functional Components (Hooks)**           |
+|--------------|-----------------------------------------------------------------------|---------------------------------------------|
+| **Mounting** | `constructor()`, `getDerivedStateFromProps()`, `render()`, `componentDidMount()` | `useEffect()` (empty dependency array `[]` for mount) |
+| **Updating** | `getDerivedStateFromProps()`, `shouldComponentUpdate()`, `render()`, `getSnapshotBeforeUpdate()`, `componentDidUpdate()` | `useEffect()` (with state or props dependencies) |
+| **Unmounting** | `componentWillUnmount()`                                             | `useEffect()` (with cleanup function)      |
+
+### **Mounting Phase Methods:**
+
+| **Method**                | **Description**                                                                 |
+|---------------------------|---------------------------------------------------------------------------------|
+| `constructor()`            | Pehla method call hota hai component banate waqt. Initial state set ki jati hai.  |
+| `getDerivedStateFromProps()` | Props update hone par state ko update karta hai.                               |
+| `render()`                 | UI ko render karta hai.                                                         |
+| `componentDidMount()`      | Component render hone ke baad side effects ko handle karta hai (e.g., API calls). |
+
+### **Updating Phase Methods:**
+
+| **Method**                | **Description**                                                                 |
+|---------------------------|---------------------------------------------------------------------------------|
+| `getDerivedStateFromProps()` | Props update hone par state ko update karta hai.                               |
+| `shouldComponentUpdate()`  | React ko batata hai ki component ko dobara render karna chahiye ya nahi.       |
+| `render()`                 | UI ko update karta hai jab state ya props change hoti hain.                     |
+| `getSnapshotBeforeUpdate()` | DOM update hone se pehle snapshot leta hai (for capturing information).        |
+| `componentDidUpdate()`     | Component ke render hone ke baad additional side effects ko handle karta hai.    |
+
+### **Unmounting Phase Method:**
+
+| **Method**                | **Description**                                                                 |
+|---------------------------|---------------------------------------------------------------------------------|
+| `componentWillUnmount()`   | Component DOM se remove hone se pehle cleanup actions (e.g., timers, subscriptions) perform karta hai. |
+
+### **Functional Components with Hooks:**
+
+| **Phase**    | **Hook**              | **Usage**                                                                 |
+|--------------|-----------------------|---------------------------------------------------------------------------|
+| **Mounting** | `useEffect()`          | Jab dependency array empty ho (`[]`), tab component mount hone ke baad run hota hai. |
+| **Updating** | `useEffect()`          | Jab dependencies change hoti hain, tab `useEffect` update phase mein run hota hai. |
+| **Unmounting** | `useEffect()` (Cleanup) | Cleanup function return hota hai jab component unmount hota hai.            |
+"""

@@ -1,0 +1,111 @@
+Batching in React ek optimization technique hai jo multiple state updates ko ek hi re-render mein group kar deti hai. React batching se performance improve hoti hai, kyunki React multiple updates ko ek single render cycle mein process karta hai, isse unnecessary re-renders ko avoid kiya jata hai.
+
+React mein state updates asynchronous hote hain, aur jab aap ek hi function mein multiple state updates karte hain, React un updates ko batch karta hai aur ek hi baar mein component ko re-render karta hai. Batching se React efficiently handle karta hai UI updates, jisse application ki performance improve hoti hai.
+
+Batching in React: Explanation
+React batching ka matlab hai ki jab aap multiple state updates karte hain, React in updates ko ek batch mein collect karta hai aur ek hi re-render ke saath process karta hai. Yeh automatic hota hai jab state updates ek event handler ya lifecycle method ke andar kiye jate hain.
+
+Example Without Batching:
+Agar aap multiple state updates ko manually handle karte ho bina batching ke, toh har ek update apne aap component ko re-render karne ka cause banega.
+
+import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  const [status, setStatus] = useState('');
+
+  const increment = () => {
+    setCount(count + 1);
+    setStatus('Incremented');
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <p>Status: {status}</p>
+      <button onClick={increment}>Increment</button>
+    </div>
+  );
+} 
+
+export default Counter;
+
+Is example mein:
+1.setCount aur setStatus dono state updates ek event handler (increment) ke andar kiye ja rahe hain.
+2.Without batching, React pehle setCount call karega, component ko re-render karega, phir setStatus call karega, aur ek aur re-render trigger hoga. Yeh unnecessary re-renders ko cause karega.
+
+Where Batching Happens
+React automatically batching handle karta hai jab:
+
+Aap event handlers mein state update karte ho.
+Aap React lifecycle methods (e.g., componentDidMount, componentDidUpdate) mein state update karte ho.
+
+Manual Batching
+React mein agar aap multiple state updates karna chahte ho aur unhe batch karwana chahte ho (jo React normally nahi kar paata), to aap ReactDOM.unstable_batchedUpdates() function ka use kar sakte hain.
+
+Example with Manual Batching:
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  const [status, setStatus] = useState('');
+
+  const increment = () => {
+    ReactDOM.unstable_batchedUpdates(() => {
+      setCount(count + 1);
+      setStatus('Incremented');
+    });
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <p>Status: {status}</p>
+      <button onClick={increment}>Increment</button>
+    </div>
+  );
+}
+
+export default Counter;
+ReactDOM.unstable_batchedUpdates() ko use karke hum manually multiple state updates ko batch kar rahe hain, jisse ek hi render trigger hota hai.
+
+
+Batched Updates in Concurrent Mode
+React Concurrent Mode mein automatic batching ka behavior aur bhi efficient ho jata hai. Yeh feature React 18 se introduce hua tha. Concurrent mode mein, React background mein state updates ko intelligently batch kar sakta hai, jisse UI seamless aur smooth re-render hoti hai.
+
+When Batching Does Not Happen
+Kuch specific scenarios hain jahan React batching apply nahi karta:
+
+1.Async Functions: Agar aap asynchronous functions (e.g., setTimeout, setInterval, Promises) ke andar state update karte ho, to React un updates ko batch nahi karega.
+2.State updates outside event handlers: Agar aap state updates ko React ke event handler ke bahar trigger karte ho, to React in updates ko batch nahi karega.
+Example Without Batching in Async Function:
+import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  const increment = async () => {
+    setCount(count + 1);
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setCount(count + 1);
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>Increment</button>
+    </div>
+  );
+}
+
+export default Counter;
+
+
+Conclusion
+1.Batching React ka ek optimization technique hai jo multiple state updates ko ek hi render mein process karne ka kaam karta hai.
+2.Yeh automatic hota hai jab aap React ke event handlers aur lifecycle methods mein state updates karte hain.
+3.React ka batching process application performance ko enhance karta hai kyunki unnecessary re-renders ko avoid kiya jata hai.
+4.Agar aap manually batching karna chahte ho to ReactDOM.unstable_batchedUpdates() ka use kar sakte ho.
+
+

@@ -1,0 +1,48 @@
+React ke Hooks ko use karte waqt kuch specific rules hote hain, jo aapko follow karne padte hain taaki aapke components properly work karein. Yeh rules aapke React application ki consistency aur stability ke liye important hote hain. Aaiye in rules ko Hinglish mein samjhte hain:
+
+Rules of Hooks in React:
+1.Only Call Hooks at the Top Level
+Aapko hooks ko sirf component ke top level par call karna hota hai, na ki conditionals, loops, ya nested functions ke andar.
+
+Galat Usage (Wrong):
+if (condition) {
+  useState();  // Don't call inside condition
+}
+
+Sahi Usage (Correct):
+const [state, setState] = useState(); // Always call at top level
+
+
+2.Only Call Hooks from React Functions
+Hooks ko sirf React ke functional components ya custom hooks mein call karna hota hai. Aap hooks ko normal JavaScript functions ya class components mein nahi call kar sakte.
+ 
+ Galat Usage (Wrong):
+function regularFunction() {
+  useEffect();  // Invalid, hooks should only be called in functional components
+}
+
+Sahi Usage (Correct):
+function MyComponent() {
+  useEffect();  // Valid, hooks can be called inside functional components
+}
+
+
+3.Follow the Order of Hooks
+React ke hooks hamesha ek specific order mein call hone chahiye, taaki React state ko track kar sake. Agar aap hooks ka order change karte hain (e.g., condition ke andar call karte hain), toh React ko error ho sakti hai.
+
+4.Custom Hooks
+Agar aapko ek se zyada hooks ka logic reuse karna ho, toh aap apne custom hooks bana sakte hain. Custom hooks bhi upar diye gaye rules ko follow karte hain.
+
+5.State and Effects Are Always in Sync
+useState aur useEffect hooks ko properly use karte waqt aapko ensure karna hota hai ki state aur effects ek dusre ke saath sync mein rahe. Agar aap effect dependencies ko incorrectly specify karte hain, toh unnecessary renders ho sakte hain.
+
+useEffect(() => {
+  // Fetch data or do some side effect
+}, [state]);  // state change pe effect run hoga
+
+Summary of Rules:
+Hooks ko hamesha top level par call karo (not inside loops, conditions, or nested functions).
+Hooks ko sirf functional components ya custom hooks mein call karo (not in normal JavaScript functions or class components).
+Hooks ka order consistent rakhna hai (same order har render mein).
+Custom hooks ko use karke logic ko reuse karo.
+State aur effects ko sync mein rakhna zaroori hai. """

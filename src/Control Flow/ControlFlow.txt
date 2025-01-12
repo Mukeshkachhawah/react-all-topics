@@ -1,0 +1,11 @@
+Control flow React mein user interface ko manage karne ka ek important concept hai. Control flow ka matlab hai ki kaise hum apne application mein logic ko organize karte hain, jisse user ki actions (jaise click, form submission, etc.) ke hisaab se content render ho sake. React mein control flow handle karna mainly conditional rendering, loops aur state ke through kiya jata hai.
+
+Control Flow in React: Key Concepts
+Conditional Rendering
+React mein hum condition ke basis par components ya elements ko render karte hain. Iske liye hum if-else statements, ternary operators, aur logical operators ka use karte hain.
+
+Rendering Lists
+Jab hume multiple items ko display karna hota hai (jaise lists of items), tab hum map() method ka use karte hain jo ek array ko iterate karta hai aur uske elements ko render karta hai.
+
+State-based Rendering
+React mein state ka use kar ke hum dynamic rendering karte hain. Jaise hi state change hoti hai, React component ko re-render kar leta hai, jisse UI automatically update hota hai.

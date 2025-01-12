@@ -1,0 +1,73 @@
+1. Webpack: A Bundler
+
+What is Webpack?
+Webpack ek module bundler hai. Iska kaam hai ki aapke different source files (JavaScript, CSS, images, etc.) ko ek ya zyada bundles mein convert karein, jo web browser mein use hone ke liye optimized ho.
+
+Jab aap apne application ko develop karte ho, to aapko multiple files aur dependencies (e.g. JS files, CSS files, images) ka use karte ho. Webpack in sab files ko combine karta hai aur ek single bundle (ya multiple optimized bundles) banata hai jo browser mein efficiently load ho sake.
+
+Key Features of Webpack:
+1.Code Splitting: Large applications ko chote parts mein divide karke load kiya jata hai, jisse performance improve hoti hai.
+2.Loaders: Yeh JavaScript ke aawa bhi other files ko handle karte hain (e.g. CSS, images, SCSS). Aap loaders ko configure karke Webpack ko batate ho kaunse files ko kaise process karna hai.
+3.Plugins: Webpack plugins ka use hum extra functionalities add karne ke liye karte hain, jaise code minification, environment variable setup, etc.
+4.Development Server: Webpack development server automatically changes ko reflect karta hai bina page reload ke, jo development process ko fast banaata hai.
+
+Webpack Example:
+Agar aapko apne JavaScript aur CSS ko bundle karna hai, to aapko Webpack ka configuration file banana hoga.
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js', // Starting point of your application
+  output: {
+    filename: 'bundle.js', // Output file
+    path: path.resolve(__dirname, 'dist'), // Output directory
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/, // CSS files ko handle karne ke liye
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
+};
+
+Webpack entry point se start hota hai (e.g., index.js).
+Output bundle ko dist/ folder mein store hota hai.
+CSS loader ka use kiya gaya hai taaki CSS ko JavaScript mein bundle kiya ja sake.
+
+2. Babel: A Transpiler
+What is Babel?
+Babel ek JavaScript transpiler hai. Yeh aapke modern JavaScript code ko older JavaScript versions mein convert karta hai taaki wo purane browsers mein bhi chal sake. Jaise ki, agar aap ES6+ features use karte ho (e.g., let, const, arrow functions, classes, etc.), to Babel in features ko ES5 mein transpile kar deta hai, jo purane browsers support karte hain.
+
+Key Features of Babel:
+
+1.Transpiling: Modern JavaScript ko backward compatible JavaScript mein convert karta hai.
+2.Plugins & Presets: Babel mein aap plugins aur presets use karte ho jisse aap specific JavaScript features ko transpile kar sakte ho.
+3.Polyfill: Babel polyfill ka use karke aap missing JavaScript functionalities ko older environments mein implement kar sakte ho.
+
+Babel Example:
+Agar aap ES6 syntax (e.g., arrow functions) ka use kar rahe hain, to Babel is code ko ES5 syntax mein convert karega.
+Original Code (ES6):
+const greet = () => {
+  console.log("Hello, World!");
+};
+greet();
+
+After Babel Transpile (ES5):
+var greet = function() {
+  console.log("Hello, World!");
+};
+greet();
+
+Babel Configuration: Aapko .babelrc file ya babel.config.js file banana padta hai.
+
+babel.config.js:
+module.exports = {
+  presets: [
+    '@babel/preset-env', // Transpile modern JavaScript to older versions
+    '@babel/preset-react', // React JSX ko transpile karna
+  ],
+};
+
+
+npm install --save-dev webpack webpack-cli babel-loader @babel/core @babel/preset-env @babel/preset-react style-loader css-loader
