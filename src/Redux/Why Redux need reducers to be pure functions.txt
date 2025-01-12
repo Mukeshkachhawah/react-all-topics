@@ -1,0 +1,67 @@
+Why Redux Needs Reducers to Be Pure Functions?
+Reducers in Redux are pure functions because is tarah se wo predictability, maintainability, aur debugging ko improve karte hain. Redux ki design philosophy ko samajhne ke liye, pehle humein pure functions ko samajhna zaroori hai.
+
+
+What is a Pure Function?
+A pure function ek aisa function hota hai jo:
+
+Always returns the same output for the same input: Agar aap same input denge, toh wo function hamesha same output dega.
+Does not cause side effects: Pure function kisi bhi external state ko modify nahi karta, jaise global variables ya external APIs.
+
+Example of Pure Function:
+function add(a, b) {
+  return a + b; // Same inputs will always give the same output
+}
+
+Example of Impure Function:
+let counter = 0;
+function increment() {
+  counter++;  // Modifying external state
+  return counter;
+}
+
+Why Redux Needs Reducers to Be Pure Functions?
+1. Predictability
+Agar reducers pure functions hain, toh aap guaranteed ho sakte ho ki given inputs (current state aur action) ke liye, reducers always same output denge. Agar ek reducer ko same state aur action dobara diya jaye, toh wo same result return karega.
+
+Example:
+// Pure reducer
+function counterReducer(state = 0, action) {
+  if (action.type === 'INCREMENT') {
+    return state + 1; // Same input, same output
+  }
+  return state;
+}
+Isse aap easily predict kar sakte ho ki action ke baad state ka kya hoga, aur application behavior consistent rahega.
+
+2. Easy Debugging
+Pure functions ka ek aur benefit yeh hai ki debugging simple ho jata hai. Agar reducer pure hai, toh aap easily track kar sakte ho ki kis action ne state ko change kiya. Redux mein Redux DevTools ka use karke aap easily dekh sakte ho ki kis action ke baad state kaise change ho raha hai, kyunki state change deterministic hota hai.
+
+Agar reducer impure hote, toh aapko side effects ke kaaran debugging mein issues aate.
+
+Example:
+
+Agar reducer apne side effects (e.g., API call) ke saath state ko change kare, toh aapko nahi pata chalega ki kis action ne state ko change kiya hai, ya kis action ke baad app ke behavior mein unexpected changes aaye hain.
+3. Maintainability
+Agar reducers pure functions hain, toh wo easily testable hote hain aur app ka code maintainable rehta hai. Aap easily unhe unit tests likh sakte ho, kyunki aapko external state ke changes ke baare mein chinta karne ki zarurat nahi padti.
+
+Pure reducers ke saath aap har time same input ke liye same output expect kar sakte ho, jisse aap tests likhne mein confident rahte ho.
+// Testable pure reducer
+function counterReducer(state = 0, action) {
+  if (action.type === 'INCREMENT') {
+    return state + 1;
+  }
+  return state;
+}
+
+// Test case
+expect(counterReducer(0, { type: 'INCREMENT' })).toBe(1); // Always predictable
+
+4. Time-Travel Debugging and State History
+Redux mein aap time-travel debugging ka use kar sakte hain, jisme aap purani states ko dekh sakte hain aur unhe re-apply kar sakte hain. Agar reducers pure functions hote hain, toh state history reliable hoti hai. Aap purani actions ko replay kar sakte ho aur state ko predict kar sakte ho.
+
+Agar reducers impure hote, toh aapko previous states ko reproduce karna mushkil ho jata, kyunki state changes non-deterministic ho jaate.
+
+5. Immutability and Avoiding Side Effects
+Pure reducers state ko mutate nahi karte. Agar reducers impure hote, toh wo directly state ko modify karte, jo immutability ke concept ko violate karta. Immutability maintain karna React aur Redux apps ke liye zaroori hai, kyunki yeh predictable behavior aur efficient re-renders ko ensure karta hai.
+
