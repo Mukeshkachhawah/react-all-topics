@@ -1,0 +1,84 @@
+Principles of Redux
+
+Redux ka use karte waqt, kuch core principles hote hain jo aapko samajhna zaroori hai. Ye principles Redux ko predictable aur maintainable banate hain.
+
+1.Single Source of Truth (Single Store):
+Redux mein, application ka state ek hi centralized store mein rakha jata hai. Iska matlab hai ki aapka poora app ek single source se data access karega. Yeh approach consistency aur maintainability ko ensure karti hai.
+
+Example: Agar aapko apne app ke user data ko kayi components mein access karna hai, toh aap un sabhi components ko ek hi store se connect kar sakte hain.
+
+2. State is Read-Only (Immutable State)
+Redux mein state ko directly modify nahi kiya ja sakta. Agar state ko update karna hai, toh aapko action dispatch karni padti hai. Actions ko process karne ke baad reducers state ko update karte hain aur naya state return karte hain. Isse state ki integrity barkarar rehti hai aur aapko predictable results milte hain.
+
+Example: Agar aapko user ka naam change karna hai, toh aap action dispatch karenge, jisme user ka naya naam hoga, aur reducer us action ko process kar ke state ko update karega.
+
+3. Changes are Made with Pure Functions (Reducers)
+State ko change karne ka kaam reducers karte hain, jo pure functions hote hain. Pure function ka matlab hai ki jab tak input same rahega, output bhi hamesha same hoga. Reducer function ek state aur action leta hai aur naya state return karta hai without modifying the original state.
+
+Example: Agar aap ADD_USER action dispatch karte hain, toh reducer is action ko process karke ek new user list return karega.
+
+Redux Flow
+Redux ka flow ek structured process hai jisme aap kaise action dispatch karte ho aur kaise state update hota hai, yeh step-by-step hota hai. Is flow ko samajhna Redux ko effectively use karne mein madad karta hai.
+1. Dispatch an Action
+Sabse pehle, aap action dispatch karte hain. Action ek plain JavaScript object hota hai, jisme type aur payload hote hain. Type define karta hai ki aapko state ko kaise update karna hai, aur payload aapka data hota hai jo state mein change karega.
+const action = {
+  type: 'ADD_USER',
+  payload: {
+    name: 'Mukesh',
+    age: 30
+  }
+};
+
+
+
+Principles of Redux
+Redux ka use karte waqt, kuch core principles hote hain jo aapko samajhna zaroori hai. Ye principles Redux ko predictable aur maintainable banate hain.
+
+1. Single Source of Truth (Single Store)
+Redux mein, application ka state ek hi centralized store mein rakha jata hai. Iska matlab hai ki aapka poora app ek single source se data access karega. Yeh approach consistency aur maintainability ko ensure karti hai.
+
+Example: Agar aapko apne app ke user data ko kayi components mein access karna hai, toh aap un sabhi components ko ek hi store se connect kar sakte hain.
+2. State is Read-Only (Immutable State)
+Redux mein state ko directly modify nahi kiya ja sakta. Agar state ko update karna hai, toh aapko action dispatch karni padti hai. Actions ko process karne ke baad reducers state ko update karte hain aur naya state return karte hain. Isse state ki integrity barkarar rehti hai aur aapko predictable results milte hain.
+
+Example: Agar aapko user ka naam change karna hai, toh aap action dispatch karenge, jisme user ka naya naam hoga, aur reducer us action ko process kar ke state ko update karega.
+3. Changes are Made with Pure Functions (Reducers)
+State ko change karne ka kaam reducers karte hain, jo pure functions hote hain. Pure function ka matlab hai ki jab tak input same rahega, output bhi hamesha same hoga. Reducer function ek state aur action leta hai aur naya state return karta hai without modifying the original state.
+
+Example: Agar aap ADD_USER action dispatch karte hain, toh reducer is action ko process karke ek new user list return karega.
+Redux Flow
+Redux ka flow ek structured process hai jisme aap kaise action dispatch karte ho aur kaise state update hota hai, yeh step-by-step hota hai. Is flow ko samajhna Redux ko effectively use karne mein madad karta hai.
+
+1. Dispatch an Action
+Sabse pehle, aap action dispatch karte hain. Action ek plain JavaScript object hota hai, jisme type aur payload hote hain. Type define karta hai ki aapko state ko kaise update karna hai, aur payload aapka data hota hai jo state mein change karega.
+
+Example:
+javascript
+Copy code
+const action = {
+  type: 'ADD_USER',
+  payload: {
+    name: 'Mukesh',
+    age: 30
+  }
+};
+
+2. Action is Sent to Reducer
+Jab action dispatch hota hai, toh wo reducers ko send kiya jata hai. Reducer function ek current state aur action ko input ke roop mein leta hai, aur naya state return karta hai. Reducers pure functions hote hain, jo existing state ko mutate nahi karte, balki ek naya state return karte hain.
+
+function userReducer(state = [], action) {
+  switch (action.type) {
+    case 'ADD_USER':
+      return [...state, action.payload];
+    default:
+      return state;
+  }
+}
+
+
+3. The State is Updated
+Reducer se naya state return hota hai, jo Redux store mein update hota hai. Redux ka store central location hota hai, jahan se state ko manage kiya jata hai. Store ka state update ho jata hai aur UI ko reflect karne ke liye re-render hota hai.
+
+4. View (UI) Re-renders
+Jaise hi state change hoti hai, React component (agar aap React use kar rahe hain) us state ko subscribe karta hai aur update ho jata hai. Redux ka store ke saath React ka connection automatic hota hai, jab bhi state change hoti hai, UI re-render ho jata hai.
+
