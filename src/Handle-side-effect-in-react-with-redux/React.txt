@@ -32,7 +32,7 @@ Example:
 };
 
 
-2. Redux Saga ka use karo
+2. Redux Saga ka use karoz
 
 Redux Saga ek aur middleware hai jo generators ke through complex side effects ko handle karta hai. Ye advanced projects ke liye best hai.
 

@@ -1,0 +1,42 @@
+React me Suspense ek feature hai jo asynchronous operations ko handle karne ke liye use hota hai. Ye primarily lazy loading aur data fetching ke saath kaam karta hai. Suspense ka kaam hai loading state ko manage karna jab tak koi component ya data load ho raha ho.
+
+1. Lazy Loading ke Saath Suspense ka Use
+React me components ko dynamically load karne ke liye React.lazy() ka use hota hai. Suspense tab tak loading message ya koi aur placeholder dikhata hai jab tak component pura load nahi ho jata.
+import React, { Suspense, lazy } from 'react';
+
+// Lazy load kiya gaya component
+const LazyComponent = lazy(() => import('./MyComponent'));
+
+function App() {
+  return (
+    <div>
+      <h1>Welcome to my App</h1>
+      {/* Suspense use kiya lazy component ko load karte samay */}
+      <Suspense fallback={<div>Loading...</div>}>
+        <LazyComponent />
+      </Suspense>
+    </div>
+  );
+}
+
+export default App;
+
+
+Explanation:
+
+React.lazy(): Lazy loading ke liye, component ko tab hi load karta hai jab wo zarurat ho.
+Suspense: Ye fallback prop ka use karta hai jo loading ke dauran placeholder dikhata hai
+
+
+2. Data Fetching ke Saath Suspense
+
+React 18 me Suspense ko data fetching ke liye bhi use kiya ja sakta hai. Ye server-side rendering aur streaming UI updates ke liye helpful hai.
+
+<Suspense fallback={<div>Loading data...</div>}>
+  <DataFetchingComponent />
+</Suspense>
+
+Suspense ka Use Kab Karein?
+Lazy loading components ke liye.
+Data fetching ke dauran loading indicators dikhane ke liye.
+Server-side rendering ke saath complex UI ko better load experience dene ke liye.
