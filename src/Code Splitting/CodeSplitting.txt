@@ -1,0 +1,80 @@
+Code splitting in React ek technique hai jisme aap apne application ke code ko multiple bundles me divide karte hain. Isse page load speed improve hoti hai kyunki browser ko poora JavaScript bundle load karne ki zarurat nahi hoti. Sirf wohi code load hota hai jo page pe visible hai.
+
+React me code splitting ko implement karne ke liye dynamic imports ka use kiya jata hai. Ye technique especially large applications me kaafi helpful hoti hai, jahan aapko saare components ek hi baar load nahi karne chahiye.
+
+Code Splitting ka Concept
+1. Initial Bundle: Jab React application load hota hai, toh ek initial JavaScript bundle hota hai jo sabhi components ko contain karta hai.
+2. Split Bundles: Code splitting ke through, aap is bundle ko chhote-chhote parts me divide kar sakte hain, jise chunks kaha jata hai.
+3. Dynamic Loading: Components ko dynamically load kiya jata hai jab wo required ho. Isse unnecessary code ko load nahi karna padta, aur app ka initial load time kam hota hai.
+
+React me code splitting ko implement karne ke liye, aap React.lazy() aur Suspense ka use karte hain.
+import React, { Suspense, lazy } from 'react';
+
+// Lazy load kiya gaya component
+const LazyComponent = lazy(() => import('./LazyComponent'));
+
+function App() {
+  return (
+    <div>
+      <h1>Welcome to my App</h1>
+      <Suspense fallback={<div>Loading...</div>}>
+        <LazyComponent />
+      </Suspense>
+    </div>
+  );
+}
+
+export default App;
+
+Explanation:
+React.lazy(): Yeh function dynamic imports ko handle karta hai. Jab component ko zarurat hoti hai, tab hi wo load hota hai.
+Suspense: Suspense ko use karke aap ek loading state set kar sakte hain, jo tab tak dikhayi deta hai jab tak lazy-loaded component load na ho jaye.
+
+Code Splitting ke Benefits:
+Faster Initial Load: Jab aap code splitting ka use karte hain, toh initially sirf wo code load hota hai jo user ko zarurat hai. Baaki code dynamically load hota hai jab user usse interact karta hai.
+Efficient Resource Loading: JavaScript file ko split karke, aap sirf wo code load karte hain jo uss particular page ya feature ke liye required hota hai, jo resources ko optimize karta hai.
+Improved User Experience: By loading only the necessary code, users feel the app is more responsive.
+
+Advanced Code Splitting (React Router ke saath)
+Agar aap React Router ka use kar rahe hain, toh aap route-based code splitting bhi kar sakte hain. Matlab, jab user kisi specific route pe jata hai, tab us route ka code load hota hai.
+
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+// Lazy-loaded routes
+const Home = lazy(() => import('./Home'));
+const About = lazy(() => import('./About'));
+
+function App() {
+  return (
+    <Router>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+        </Switch>
+      </Suspense>
+    </Router>
+  );
+}
+
+export default App;
+
+
+Code Splitting with Webpack
+React me code splitting ko achhe se handle karne ke liye, Webpack ka use hota hai, jo automatically bundles ko split karta hai jab import() syntax use kiya jata hai.
+
+Example Webpack Setup (for Production):
+Webpack automatically code splitting ko handle karta hai jab aap dynamic imports (import()) use karte hain.
+Aapko Webpack configuration me optimization settings set karni hoti hain jisme chunking ko enable kiya jata hai.
+
+// webpack.config.js
+module.exports = {
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
+};
+
+
