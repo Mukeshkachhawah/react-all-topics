@@ -1,0 +1,18 @@
+Updating (when props or state change)
+
+render():
+Runs again when the component’s state or props change. It updates the UI.
+
+shouldComponentUpdate():
+Lets you decide if the component should update. It returns true or false.
+
+shouldComponentUpdate(nextProps, nextState) {
+  return nextState.count !== this.state.count;
+}
+
+componentDidUpdate():
+Runs after the update is done. Good for making something happen after a change.
+
+componentDidUpdate() {
+  console.log("The component updated!");
+}
