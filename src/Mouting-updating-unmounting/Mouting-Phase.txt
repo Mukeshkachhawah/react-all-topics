@@ -1,7 +1,10 @@
-Mounting (when the component is created and added to the screen)
+Lifecycle methods React ke class components ke special functions hote hain jo component ke life cycle ke alag-alag stages par kaam karte hain — jab component create hota hai, update hota hai, aur jab remove kiya jata hai. Inka use initial values set karne, data fetch karne, aur resources cleanup karne ke liye kiya jata hai.
+
+
+Mounting React ke Mounting phase ka use hum tab karte hain jab component screen par pehli baar load hota hai, aur hum initial values set karte hain
 
 constructor():
-Runs when the component is first created. It’s used to set up the initial state or bind event handlers.
+It’s used to set up the initial state or bind event handlers.
 
 constructor(props) {
   super(props);
@@ -9,11 +12,19 @@ constructor(props) {
 }
 
 render():
-Defines what the UI looks like. It returns the JSX that will be shown on the screen.
+ method React ke class components ka ek sabse important method hai. Iska kaam user interface (UI) ko define karna hota hai. Ye method bataata hai ki component ka layout (HTML-like JSX) screen par kaisa dikhna chahiye.
 
 componentDidMount():
-Runs after the component is added to the screen. It’s good for things like fetching data from a server.
+ ek lifecycle method hai jo React class components mein tab chalti hai jab component screen par render hone ke baad DOM (Document Object Model) mein add ho chuka hota hai. Iska use side effects handle karne ke liye kiya jata hai, jaise:
+ 
+Example:
+    API se data fetch karna
+    Event listeners lagana
+    Timers set karna
+
 
 componentDidMount() {
   console.log("Component is on the screen!");
+
+
 }
