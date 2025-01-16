@@ -1,0 +1,19 @@
+Mounting (when the component is created and added to the screen)
+
+constructor():
+Runs when the component is first created. It’s used to set up the initial state or bind event handlers.
+
+constructor(props) {
+  super(props);
+  this.state = { count: 0 };
+}
+
+render():
+Defines what the UI looks like. It returns the JSX that will be shown on the screen.
+
+componentDidMount():
+Runs after the component is added to the screen. It’s good for things like fetching data from a server.
+
+componentDidMount() {
+  console.log("Component is on the screen!");
+}

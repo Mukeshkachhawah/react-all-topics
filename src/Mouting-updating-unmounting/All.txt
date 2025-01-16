@@ -126,3 +126,4 @@ React Lifecycle Phases (Mounting, Updating, Unmounting)
 | **Updating** | `useEffect()`          | Jab dependencies change hoti hain, tab `useEffect` update phase mein run hota hai. |
 | **Unmounting** | `useEffect()` (Cleanup) | Cleanup function return hota hai jab component unmount hota hai.            |
 """
+
