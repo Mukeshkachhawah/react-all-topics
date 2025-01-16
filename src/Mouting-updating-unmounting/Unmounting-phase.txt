@@ -1,8 +1,38 @@
+Unmounting (when the component is removed from the screen)
 componentWillUnmount():
 Runs just before the component is removed. It’s used for cleanup, like stopping timers or canceling API calls.
 
 componentWillUnmount() {
   console.log("Component is gone!");
 }
+
+React Class Component Lifecycle Methods
+========================================
+
+1. Mounting (When the component is created and added to the screen)
+   - constructor(): Sets up the initial state or binds event handlers.
+   - render(): Defines and returns the UI.
+   - componentDidMount(): Runs after the component is added to the screen. Good for fetching data.
+
+2. Updating (When props or state change)
+   - render(): Updates the UI when state or props change.
+   - shouldComponentUpdate(): Decides if the component should update. Returns true or false.
+   - componentDidUpdate(): Runs after the component has been updated.
+
+3. Unmounting (When the component is removed from the screen)
+   - componentWillUnmount(): Runs before the component is removed. Used for cleanup (like stopping timers).
+
+Summary Table
+=============
+| Phase       | Method Name              | When It Happens                           |
+|-------------|--------------------------|--------------------------------------------|
+| Mounting    | constructor()            | When the component is created.            |
+| Mounting    | render()                 | When the UI is drawn.                     |
+| Mounting    | componentDidMount()      | After the component is on the screen.     |
+| Updating    | shouldComponentUpdate()  | Before updating to decide if it should.   |
+| Updating    | render()                 | Updates the UI when state or props change.|
+| Updating    | componentDidUpdate()     | After the component is updated.           |
+| Unmounting  | componentWillUnmount()   | Just before the component is removed.     |
+
 
 
