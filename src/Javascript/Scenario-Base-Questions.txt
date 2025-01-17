@@ -116,5 +116,9 @@ const arr = [1, 2, 3, 4, 4, 5, 5];
 const uniqueArr = [...new Set(arr)];
 console.log(uniqueArr);
 
+Question 7 : Scenario: Deep Copying an Object
+
+
+Note: JSON.parse(JSON.stringify(obj)) works for simple objects but fails for objects with functions or special types like Date.
 
 

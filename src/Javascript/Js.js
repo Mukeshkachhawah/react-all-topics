@@ -1,3 +1,11 @@
-const arr = [1, 2, 3, 4, 4, 5, 5];
-const uniqueArr = [...new Set(arr)];
-console.log(uniqueArr);
+const obj = {
+  name: "John",
+  age: 30,
+  city: {
+    country: "USA",
+  },
+};
+// const deepCopy = JSON.parse(JSON.stringify(obj));
+
+obj.city.country = "UK";
+console.log(obj.city.country); // USA
