@@ -86,3 +86,26 @@ const object = Object.freeze({
 object.name = "Mukesh";  //type error
 console.log(object.name);
 
+Question 5 Scenario: Implementing a Polyfill for Array.prototype.map()
+Is question ka matlab hai ki aapko Array.prototype.map() function ka polyfill likhna hai. Polyfill ka matlab hota hai ki agar 
+kisi function ko browser support nahi karta hai, to hum us function ko manually implement kar sakein.
+
+
+Answer : 
+Array.prototype.map() ek built-in JavaScript method hai jo ek array ke har element par ek function apply karta hai aur uske result se ek naya array banata hai.
+
+Polyfill ka matlab hai: agar aapko pata chale ki koi function, jaise map(), purane browsers mein supported nahi hai, to aap uska manually implementation karte ho, taaki wo function un browsers mein bhi kaam kare.
+
+Array.prototype.myMap = function(callback) {
+  const result = [];
+  for (let i = 0; i < this.length; i++) {
+    if (this.hasOwnProperty(i)) {
+      result.push(callback(this[i], i, this));
+    }
+  }
+  return result;
+};
+
+const numbers = [1, 2, 3];
+const doubled = numbers.myMap(num => num * 2);
+console.log(doubled);  // [2, 4, 6]
