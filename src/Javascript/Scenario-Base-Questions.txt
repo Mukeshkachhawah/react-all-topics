@@ -117,8 +117,20 @@ const uniqueArr = [...new Set(arr)];
 console.log(uniqueArr);
 
 Question 7 : Scenario: Deep Copying an Object
+Answer : To create a deep copy of an object in JavaScript, you can use JSON.parse and JSON.stringify methods. However, this approach has limitations and may not work for all types of objects, such as those containing functions or special types like Date. Here's an example:
+const obj = {
+  name: "John",
+  age: 30,
+  city: {
+    country: "USA",
+  },
+};
+const deepCopy = JSON.parse(JSON.stringify(obj));
 
+deepCopy.city.country = "UK";
+console.log(obj.city.country); // USA
 
+console.log(deepCopy.city.country); // UK
 Note: JSON.parse(JSON.stringify(obj)) works for simple objects but fails for objects with functions or special types like Date.
 
-
+Question 8:
