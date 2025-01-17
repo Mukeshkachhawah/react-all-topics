@@ -1,0 +1,21 @@
+Question:You are building a search input field that triggers an API call whenever the user types. However, you want to limit API requests so they only occur after the user stops typing for 500ms. How would you implement this?
+Answer:You can use debouncing to limit API calls:
+let debounceTimer;
+function debounceSearch(callback, delay) {
+  return function () {
+    const args = arguments;
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => callback.apply(this, args), delay);
+  };
+}
+
+function search(query) {
+  console.log(`Searching for: ${query}`); // Replace with an actual API call
+}
+
+const input = document.getElementById('searchInput');
+input.addEventListener('input', debounceSearch(() => search(input.value), 500));
+
+
+
+Question : 
