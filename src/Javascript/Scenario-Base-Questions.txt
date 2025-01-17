@@ -109,3 +109,12 @@ Array.prototype.myMap = function(callback) {
 const numbers = [1, 2, 3];
 const doubled = numbers.myMap(num => num * 2);
 console.log(doubled);  // [2, 4, 6]
+
+Question 6 :Scenario: Removing Duplicates from an Array
+Answer : You can remove duplicates from an array in JavaScript by using a Set, which automatically handles uniqueness. Here's an example:
+const arr = [1, 2, 3, 4, 4, 5, 5];
+const uniqueArr = [...new Set(arr)];
+console.log(uniqueArr);
+
+
+
