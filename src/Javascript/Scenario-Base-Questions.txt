@@ -1,4 +1,4 @@
-Question:You are building a search input field that triggers an API call whenever the user types. However, you want to limit API requests so they only occur after the user stops typing for 500ms. How would you implement this?
+Question 1. You are building a search input field that triggers an API call whenever the user types. However, you want to limit API requests so they only occur after the user stops typing for 500ms. How would you implement this?
 Answer:You can use debouncing to limit API calls:
 let debounceTimer;
 function debounceSearch(callback, delay) {
@@ -18,4 +18,18 @@ input.addEventListener('input', debounceSearch(() => search(input.value), 500));
 
 
 
-Question : 
+Question 2. Scenario: Fixing a Variable Scope Issue in Loops
+Aapko 1 se 5 tak numbers ko ek second ke delay ke saath console me log karna hai, lekin var use karne se sabhi logs 6 dikhate hain. Aap ise kaise fix karenge?
+
+Answer-1 : Use let instead of var to create block-scoped variables:
+for (let i = 1; i <= 5; i++) {
+  setTimeout(() => console.log(i), i * 1000);
+}
+Answer-2 :Alternatively, using var with an IIFE (ImmediatelyInvoked Function Expression):
+for (var i = 1; i <= 5; i++) {
+    (function(i) {
+        setTimeout(() => console.log(i), i * 1000);
+        })(i);
+        }
+
+
