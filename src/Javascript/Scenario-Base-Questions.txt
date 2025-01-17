@@ -77,7 +77,12 @@ promise.then((value) => {
   }
 });
 
-
-
-
+Question 4. Aapko ek object banana hai jo modify nahi kiya ja sake (koi property add, delete, ya change nahi ho sakti). Aap ise kaise karenge?
+Answer : You can create an immutable object in JavaScript by using Object.freeze(). Here's an example:
+const object = Object.freeze({
+    name :"Mukks",
+    age:"22",}
+)
+object.name = "Mukesh";  //type error
+console.log(object.name);
 
