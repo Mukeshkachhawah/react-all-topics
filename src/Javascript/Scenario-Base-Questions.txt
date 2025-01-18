@@ -9,6 +9,7 @@ function debounceSearch(callback, delay) {
   };
 }
 
+
 function search(query) {
   console.log(`Searching for: ${query}`); // Replace with an actual API call
 }
@@ -133,4 +134,44 @@ console.log(obj.city.country); // USA
 console.log(deepCopy.city.country); // UK
 Note: JSON.parse(JSON.stringify(obj)) works for simple objects but fails for objects with functions or special types like Date.
 
-Question 8:
+Question 8. Tumhare paas ek button hai, jab bhi user uspe click kare, ek random background color set ho jaye. Kaise implement karoge?
+Answer: Pehle button ko select karo using document.querySelector ya getElementById. Fir ek event listener add karo addEventListener ke saath. Jab button click hoga, ek random color generate karne ke liye ek function likho aur style.backgroundColor ko update kar do.
+
+const button = document.querySelector('#changeColorButton');
+
+button.addEventListener('click', () => {
+  const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);  // Generates random hex color
+  document.body.style.backgroundColor = randomColor;
+});
+
+Question 9.Tumhe ek form validation karni hai jisme email aur password fields hain. Agar email galat format ka ho ya password 6 characters se kam ho to error message dikhao.
+Answer : 
+ehle form aur input fields ko select karo. addEventListener ka use karke form submit hone par preventDefault() lagao, fir condition ke saath email aur password validate karo.
+
+const form = document.querySelector('#loginForm');
+const emailInput = document.querySelector('#email');
+const passwordInput = document.querySelector('#password');
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const email = emailInput.value;
+  const password = passwordInput.value;
+
+  if (!email.includes('@') || email.length < 5) {
+    alert('Please enter a valid email address.');
+  } else if (password.length < 6) {
+    alert('Password must be at least 6 characters long.');
+  } else {
+    alert('Form submitted successfully!');
+  }
+});
+
+Question (Scenario-Based):
+Ek array hai numbers ka. Tumhe har number ko square karna hai aur ek naye array me store karna hai. Kaunsa method use karoge?
+
+Answer:map() method ka use kar sakte ho har element ko transform karne ke liye aur square values ka ek naya array return karne ke liye.
+
+const numbers = [1, 2, 3, 4, 5];
+const squaredNumbers = numbers.map(num => num * num);
+console.log(squaredNumbers);  // Output: [1, 4, 9, 16, 25]
+
