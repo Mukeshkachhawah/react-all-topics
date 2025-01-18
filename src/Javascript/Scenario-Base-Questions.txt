@@ -166,7 +166,7 @@ form.addEventListener('submit', (event) => {
   }
 });
 
-Question (Scenario-Based):
+Question 10.  (Scenario-Based):
 Ek array hai numbers ka. Tumhe har number ko square karna hai aur ek naye array me store karna hai. Kaunsa method use karoge?
 
 Answer:map() method ka use kar sakte ho har element ko transform karne ke liye aur square values ka ek naya array return karne ke liye.
@@ -175,3 +175,41 @@ const numbers = [1, 2, 3, 4, 5];
 const squaredNumbers = numbers.map(num => num * num);
 console.log(squaredNumbers);  // Output: [1, 4, 9, 16, 25]
 
+Question 11. (Scenario-Based):
+Tumhare paas ek array of objects hai jisme har object ek student ka naam aur score batata hai. Tumhe un students ko filter karna hai jinki score 50 se zyada hai. Kaise karoge?
+
+Answer:filter() method ka use karo objects ko filter karne ke liye based on score.
+
+Question12. Tumhe ek object ka clone banakar usme kuch properties update karni hai bina original object ko modify kiye. Kaise karoge?
+Answer: Spread operator ka use karo ya Object.assign() method ka use karo.
+
+const originalObject = { name: 'Mukesh', age: 25, city: 'Jaipur' };    |
+const updatedObject = { ...originalObject, age: 26, city: 'Udaipur' }; |
+console.log(updatedObject);                                            |
+
+Question 13:Tumhe ek string reverse karna hai bina built-in reverse() method ka use kiye. Kaise karoge?
+Answer : 
+const str = 'JavaScript';
+let reversedStr = '';
+for (let i = str.length - 1; i >= 0; i--) {
+  reversedStr += str[i];
+}
+console.log(reversedStr);  // Output: 'tpircSavaJ'
+
+Question 14. Tumhare paas ek array of numbers hai. Tumhe check karna hai ki kya array me sabhi elements even hain.
+Answer : every() method ka use karo.
+let arr = [1, 2, 3, 4];
+arr.every((item) => item % 2 === 0);
+
+Question 15. Tumhe ek function create karna hai jo kisi number ko factorial de. Kaise likhoge?
+Answer : 
+function factorial(n) {
+  let fac = 1;
+  for (let i = 1; i <= n; i++) {
+    fac *= i;
+  }
+  console.log(fac);
+}
+factorial(5);
+
+Question 16
