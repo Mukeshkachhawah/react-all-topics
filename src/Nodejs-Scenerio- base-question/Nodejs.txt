@@ -70,6 +70,168 @@ app.listen(3000, () => {
   console.log('Server running on port 3000');
 });
 
+Question 4.  Handling Environment-Specific Configurations
+Development aur production environment ke liye alag-alag configurations kaise manage karenge?
+require('dotenv').config();
 
+const port = process.env.PORT || 3000;
+const dbUrl = process.env.DB_URL;
+
+console.log(`Server running on port ${port}`);
+console.log(`Connected to database: ${dbUrl}`);
+
+
+Question 5. Implementing a WebSocket Server
+Aapko ek WebSocket server banani hai jisme clients connect kar sakte hain aur messages exchange kar sakte hain. WebSocket server kaise implement karenge?
+Answer : WebSocket server ko implement karne ke liye `ws` package ka use kar sakte hain.
+
+const WebSocket = require('ws');
+
+const wss = new WebSocket.Server({ port: 8080 });
+
+step 1 . Create the WebSocket Server Use the ws library to create a WebSocket server.
+// websocket-server.js
+const WebSocket = require('ws');
+
+const port = 8080;
+const server = new WebSocket.Server({ port });
+
+console.log(`WebSocket server running on ws://localhost:${port}`);
+
+// Handle client connections
+server.on('connection', (socket) => {
+  console.log('New client connected');
+
+  // Receive messages from client
+  socket.on('message', (message) => {
+    console.log(`Received: ${message}`);
+
+    // Broadcast message to all connected clients
+    server.clients.forEach((client) => {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(`Server received: ${message}`);
+      }
+    });
+  });
+
+  // Handle client disconnection
+  socket.on('close', () => {
+    console.log('Client disconnected');
+  });
+
+  // Send welcome message
+  socket.send('Welcome to the WebSocket server!');
+});
+
+step 2.Run the server node websocket-server.js
+
+
+
+Question 6.Managing Large File Uploads
+Aapko ek server-side API banani hai jo large files upload kar sake. Kaise ensure karenge ki server overload na ho aur file efficiently handle ho?
+Answer : Is use case ke liye hum multer ya stream module ka use karenge taaki file streams ko handle kiya ja sake bina server ka memory pressure badhaye.
+
+const express = require('express');
+const multer = require('multer');
+const app = express();
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, './uploads'),
+  filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname),
+});
+
+const upload = multer({ storage });
+
+app.post('/upload', upload.single('file'), (req, res) => {
+  res.send('File uploaded successfully!');
+});
+
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
+
+Question 7.Aapko nested callbacks use karte hue ek application milti hai. Kaise improve karenge taaki code readable aur maintainable ho?
+Answer: Promises ya async/await ka use karenge to avoid callback hell.
+
+
+Question 8.Authentication with JSON Web Tokens (JWT)
+Answer : 
+const jwt = require('jsonwebtoken');
+const secretKey = 'mySecretKey';
+
+// Generate a token
+function generateToken(user) {
+  return jwt.sign({ id: user.id, name: user.name }, secretKey, { expiresIn: '1h' });
+}
+
+// Verify a token
+function verifyToken(token) {
+  try {
+    const decoded = jwt.verify(token, secretKey);
+    console.log('Token is valid:', decoded);
+  } catch (error) {
+    console.error('Invalid token:', error.message);
+  }
+}
+
+const token = generateToken({ id: 1, name: 'John Doe' });
+console.log('Generated Token:', token);
+verifyToken(token);
+
+Question 9. Handling Database Transactions in Node.js
+Ek e-commerce application me, aapko ensure karna hai ki order aur payment ka data atomic operations ke roop me store ho. Transactions kaise implement karenge?
+Answer: Transactions ke liye databases ke specific transaction APIs ya libraries like Sequelize ka use karte hain.
+
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = new Sequelize('sqlite::memory:');
+
+async function performTransaction() {
+  const t = await sequelize.transaction();
+  try {
+    await User.create({ name: 'Alice' }, { transaction: t });
+    await Order.create({ item: 'Laptop', userId: 1 }, { transaction: t });
+
+    await t.commit();  // Commit transaction
+    console.log('Transaction completed successfully!');
+  } catch (error) {
+    await t.rollback();  // Rollback on error
+    console.error('Transaction failed:', error);
+  }
+}
+
+performTransaction();
+
+Question 10 . Securing an Express Application Against Common Attacks
+Aapko ek Express.js application ko common web attacks (like XSS, CSRF, SQL Injection) se secure karna hai. Kaise implement karenge?
+step 1. XSS (Cross-Site Scripting) prevention using helmet:
+npm install helmet
+
+const express = require('express');
+const helmet = require('helmet');
+const app = express();
+
+app.use(helmet());  // Adds security headers
+
+app.get('/', (req, res) => {
+  res.send('Secure Express Application');
+});
+
+app.listen(3000, () => console.log('Server running on port 3000'));
+
+step 2.CSRF (Cross-Site Request Forgery) prevention using csurf:
+npm install csurf
+
+const csrf = require('csurf');
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(csrf());
+
+app.get('/form', (req, res) => {
+  res.send(`<form method="POST" action="/submit">
+    <input type="hidden" name="_csrf" value="${req.csrfToken()}">
+    <button type="submit">Submit</button>
+  </form>`);
+});
 
 
