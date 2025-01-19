@@ -203,35 +203,58 @@ performTransaction();
 
 Question 10 . Securing an Express Application Against Common Attacks
 Aapko ek Express.js application ko common web attacks (like XSS, CSRF, SQL Injection) se secure karna hai. Kaise implement karenge?
-step 1. XSS (Cross-Site Scripting) prevention using helmet:
+method 1. XSS (Cross-Site Scripting) prevention using helmet:
 npm install helmet
 
-const express = require('express');
 const helmet = require('helmet');
-const app = express();
-
 app.use(helmet());  // Adds security headers
 
-app.get('/', (req, res) => {
-  res.send('Secure Express Application');
-});
-
-app.listen(3000, () => console.log('Server running on port 3000'));
-
-step 2.CSRF (Cross-Site Request Forgery) prevention using csurf:
+method 2.CSRF (Cross-Site Request Forgery) :
 npm install csurf
 
+CSRF token ka use karo (csurf middleware):
 const csrf = require('csurf');
-const bodyParser = require('body-parser');
+const csrfProtection = csrf({ cookie: true });
+app.use(csrfProtection);
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(csrf());
+Har form me CSRF token inject karo:<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
-app.get('/form', (req, res) => {
-  res.send(`<form method="POST" action="/submit">
-    <input type="hidden" name="_csrf" value="${req.csrfToken()}">
-    <button type="submit">Submit</button>
-  </form>`);
+SameSite cookies ka use karo: res.cookie('XSRF-TOKEN', req.csrfToken(), { sameSite: 'Strict' });
+
+method 3. XSS (Cross-Site Scripting) Se Protection
+XSS attack mein malicious scripts ka injection hota hai jo browser pe run karte hain. Isse bachne ke liye:
+xss-clean middleware ko use karo: 
+npm install xss-clean
+
+Input ko sanitize karna (XSS-Clean):xss-clean middleware ko use karo:
+const xss = require('xss-clean');
+app.use(xss());
+
+Helmet.js ka use karo:Helmet HTTP headers ka use karke aapki app ko secure karta hai.
+const helmet = require('helmet');
+app.use(helmet());
+
+Escape characters ko sanitize karo: : Jab data ko DOM me render kar rahe ho tab input ko escape karo.
+const escapedInput = escape(userInput);
+
+method 3.SQL Injection Se Protection
+SQL Injection user inputs ko SQL queries me inject karke data ko manipulate karta hai.
+Parameterized Queries ka use karo: const userId = req.body.userId;
+db.query('SELECT * FROM users WHERE id = ?', [userId], (err, result) => {
+  if (err) throw err;
+  console.log(result);
 });
+
+ORM libraries ka use karo:
+
+Mongoose (MongoDB), Sequelize (MySQL/Postgres) SQL Injection se bachate hain.
+
+
+Question 
+
+
+
+
+
 
 
