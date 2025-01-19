@@ -250,11 +250,157 @@ ORM libraries ka use karo:
 Mongoose (MongoDB), Sequelize (MySQL/Postgres) SQL Injection se bachate hain.
 
 
-Question 
+Question 11. Aapka project development, staging, aur production environments ke liye alag configurations use karta hai. Kaise manage karenge?
+Answer : Using dotenv to manage environment variables:
+
+Create different .env files:
+.env.development
+.env.production
+
+Question 12.  Implementing Pagination in API
+Aapko ek API banani hai jo large datasets return karti hai. Kaise pagination implement karenge?
+Answer:app.get('/products', async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const offset = (page - 1) * limit;
+
+  const products = await Product.findAll({ limit, offset });
+  res.json({ page, limit, data: products });
+});
+
+page and limit are query parameters.
+offset calculates the starting point for each page.
+
+Question 13. Aapko ek API ke responses cache karne hain taaki performance improve ho. Kaise implement karenge?
+Redis caching ka use karenge.npm install redis
+
+const redis = require('redis');
+const client = redis.createClient();
+
+app.get('/data', async (req, res) => {
+  const cacheData = await client.get('data');
+  if (cacheData) {
+    return res.json(JSON.parse(cacheData));
+  }
+
+  const data = await fetchDataFromDatabase();  // Simulating database fetch
+  client.setex('data', 3600, JSON.stringify(data));  // Cache for 1 hour
+  res.json(data);
+});
+
+Question 14. Kaise ensure karenge ki jab server band ho, to all resources (like database connections) properly close ho jayein?
+Answer: Using process events ka use karenge to handle shutdown signals.
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+const server = app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+process.on('SIGTERM', () => {
+  console.log('Closing server gracefully...');
+  server.close(() => {
+    console.log('Server closed.');
+    process.exit(0);
+  });
+});
+
+process.on('SIGINT', () => {
+  console.log('Interrupt received, shutting down.');
+  server.close(() => {
+    process.exit(0);
+  });
+});
 
 
+Question 15.Ek REST API me file download ka feature kaise implement karenge?
+Answer:
+res.download ka use karte hain file serve karne ke liye.
+
+app.get('/download', (req, res) => {
+  const file = path.join(__dirname, 'sample.pdf');
+  res.download(file, 'downloaded.pdf', (err) => {
+    if (err) {
+      console.error('Error during download:', err);
+    }
+  });
+});
+
+Question 16. Kaise ensure karenge ki multiple asynchronous tasks parallelly execute ho aur completion ke baad ek response return karein?
+Answer:
+Promise.all ka use karenge.
+
+Question 17. Implementing Logging for an Application
+Aapko ek application ke liye proper logging system implement karna hai. Kaise karenge
+npm install winston
+
+const winston = require('winston');
+
+const logger = winston.createLogger({
+  level: 'info',
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({ filename: 'app.log' }),
+  ],
+});
+
+logger.info('Application started successfully.');
+logger.error('An error occurred.');
 
 
+Question 18. Avoiding Memory Leaks
+Kaise diagnose aur avoid karenge ki application me memory leak na ho?
+
+Memory leaks prevent karne ke liye:
+
+Avoid global variables
+Use event emitters carefully and remove unused listeners
+Profiling tools ka use karen like Chrome DevTools or Node.js --inspect flag. node --inspect index.js
+
+Use the heapdump module to analyze memory usage:npm install heapdump
+const heapdump = require('heapdump');
+heapdump.writeSnapshot('./heapdump-' + Date.now() + '.heapsnapshot');
+
+Question 19.nodejs me Static files (like HTML, CSS, images) serve karne ke liye kaun sa module use karenge?
+Express.js ke express.static middleware ka use karte hain.
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+Question 20. Handling Form Data in Express : Kaise form data ko POST request me handle karenge?
+Answer: express.urlencoded middleware ka use karenge.
+app.use(express.urlencoded({ extended: true }));
+
+Question 21. Handling JSON Data in API
+Kaise API me JSON request data ko parse karenge?
+Answer:
+express.json middleware ka use karenge.
+
+Question 22. Agar aapko query parameters read karni hain, to kaise handle karenge?
+Answer:
+Express mein query parameters ko req.query ke through access karte hain.
+
+app.get('/greet', (req, res) => {
+  const name = req.query.name || 'Guest';
+  res.send(`Hello, ${name}!`);
+});
+exmaple :http://localhost:3000/greet?name=John
+
+Question 23.Handling Errors in Express
+Express mein error middleware use karte hain.
+Answer :app.use((err, req, res, next) => {
+  console.error(err.message);
+  res.status(500).send('Something went wrong!');
+});
 
 
+Question 24.Kaise server se JSON response bhejenge?
+Answer:res.json() method ka use karke JSON data bhejte hain.
 
+Question 25.Kaise ek custom middleware banayenge jo har request ko log kare?
+Answer :
+// Custom middleware to log request details
+app.use((req, res, next) => {
+  console.log(`${req.method} request made to ${req.url}`);
+  next(); // Pass control to the next middleware or route
+});
