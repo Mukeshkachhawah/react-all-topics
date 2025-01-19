@@ -212,4 +212,18 @@ function factorial(n) {
 }
 factorial(5);
 
-Question 16
+Question 16.Tumhare paas ek string hai jisme kuch words hai separated by space. Tumhe har word ka pehla letter capitalize karna hai.
+Answer : split(), map(), aur join() ka use karo.
+function firstLetterCapitalize(sentense) {
+  return sentense
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+console.log(firstLetterCapitalize("Mukss kese ho "));
+
+
+Question 17 Tumhe ek function likhna hai jo ek array ke andar deeply nested arrays ko flatten kare. Jaise [[1, 2], [3, [4, 5]]] ko [1, 2, 3, 4, 5] me convert kare.
+Answer : 
+
+

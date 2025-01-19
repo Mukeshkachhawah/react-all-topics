@@ -5,7 +5,7 @@ React mein state updates asynchronous hote hain, aur jab aap ek hi function mein
 Batching in React: Explanation
 React batching ka matlab hai ki jab aap multiple state updates karte hain, React in updates ko ek batch mein collect karta hai aur ek hi re-render ke saath process karta hai. Yeh automatic hota hai jab state updates ek event handler ya lifecycle method ke andar kiye jate hain.
 
-Example Without Batching:
+Example Without Batching :
 Agar aap multiple state updates ko manually handle karte ho bina batching ke, toh har ek update apne aap component ko re-render karne ka cause banega.
 
 import React, { useState } from 'react';
@@ -13,7 +13,7 @@ import React, { useState } from 'react';
 function Counter() {
   const [count, setCount] = useState(0);
   const [status, setStatus] = useState('');
-
+ 
   const increment = () => {
     setCount(count + 1);
     setStatus('Incremented');
