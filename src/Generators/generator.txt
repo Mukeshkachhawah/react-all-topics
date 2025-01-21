@@ -1,0 +1,52 @@
+Generator ek special type ka function hota hai jo execution ko "pause" aur "resume" kar sakta hai. Ise function* syntax se define kiya jata hai aur isme yield keyword ka use hota hai.
+
+function* numberGenerator() {
+    yield 1;
+    yield 2;
+    yield 3;
+}
+
+// Generator ko use karne ke liye
+const gen = numberGenerator();
+console.log(gen.next().value); // 1
+console.log(gen.next().value); // 2
+console.log(gen.next().value); // 3
+
+
+Generator ke kuch important points:
+
+Jab aap generator function ko call karte hain, toh woh turant execute nahi hota
+yield keyword function ko pause kar deta hai aur value return karta hai
+next() method se aap generator ko aage badhate hain
+Har next() call par generator agli yield value tak execute hota hai
+Jab generator ka sabhi yield statements execute ho jate hain, toh generator done: true return karta hai
+
+Real use case example:
+function* idGenerator() {
+    let id = 1;
+    while(true) {
+        yield `USER_${id}`;
+        id++;
+    }
+}
+
+const userIds = idGenerator();
+console.log(userIds.next().value); // "USER_1"
+console.log(userIds.next().value); // "USER_2"
+console.log(userIds.next().v2.alue); // "USER_3"
+
+Generators ka use mainly in cases mein hota hai:
+
+Infinite sequences banane ke liye
+Large data ko chunks mein process karne ke liye
+Memory efficient way mein data ko iterate karne ke liye
+
+USES : 
+1.Memory Efficient Data Handling (Badi files ya data ko efficiently handle karna):
+2.Infinite Series Banana (Jaise unique IDs):
+3.Database Pagination (Data ko chunks mein fetch karna):
+4.Custom Iterators Banana:
+5.Asynchronous Operations ko Control Karna:
+6.State Management (Redux Saga jaise):
+7.Testing mein Mock Data Generate karna:
+

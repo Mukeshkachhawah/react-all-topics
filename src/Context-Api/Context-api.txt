@@ -1,0 +1,24 @@
+Context API Kya Hai?
+Context API ek aisa feature hai jo React mein props drilling se bachne ke liye use hota hai. Ye data ko directly parent se kisi bhi child component mein share karne ki capability deta hai, chahe wo kitne bhi levels deep ho.
+
+
+Kab Use Karein (When to Use):
+
+1. Global Data Sharing:
+
+Theme (dark/light mode)
+User authentication data
+Language preferences
+Shopping cart data
+
+2.Props Drilling Se Bachne Ke Liye:
+
+
+Kab Nahi Use Karna Chahiye:
+
+Jab data sirf 1-2 level deep pass karna ho
+Jab component reusability important ho
+Small applications mein unnecessary complexity 
+
+
+

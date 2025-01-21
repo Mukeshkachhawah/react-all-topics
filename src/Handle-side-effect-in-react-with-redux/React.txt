@@ -1,9 +1,11 @@
 React ke saath jab Redux use karte ho, to side effects ko handle karna thoda tricky ho sakta hai. Side effects ka matlab hota hai wo cheezein jo state ke bahar hoti hain — jaise API calls, data fetching, ya browser local storage ko update karna. React aur Redux me isko manage karne ke liye kuch best practices aur tools ka use hota hai.
 
+Local/Component level data → useEffect
+Global/App level data → Redux Thunk
+
 Kaise handle karein side effects Redux ke saath?
 1. Redux Thunk ka use karo:
-Redux Thunk ek popular middleware hai jo action creators ke andar asynchronous code likhne ki facility 
-deta hai.
+Redux Thunk ek middleware hai jo async actions handle karne mein help karta hai. Simple bhasha mein - jab aapko API calls karne hain ya koi aisa kaam jo time leta hai, tab Redux Thunk use hota hai.
 Example:
     npm install redux-thunk
 
@@ -31,10 +33,19 @@ Example:
   };
 };
 
+Kab Use Karein:
 
-2. Redux Saga ka use karoz
+API calls karne ke liye
+Multiple actions dispatch karne ke liye
+Conditional dispatching ke liye
+Loading states handle karne ke liye
+
+
+2. Redux Saga ka use karo
 
 Redux Saga ek aur middleware hai jo generators ke through complex side effects ko handle karta hai. Ye advanced projects ke liye best hai.
+
+Redux Saga generators use karta hai (function* syntax) aur ye zyada complex operations handle kar sakta hai:
 
 import { call, put, takeEvery } from 'redux-saga/effects';
 
@@ -51,6 +62,18 @@ function* fetchUser(action) {
 function* mySaga() {
   yield takeEvery('FETCH_USER_REQUEST', fetchUser);
 }
+
+Kab Use Karein Saga:
+Complex async operations
+Race conditions handle karne ke liye
+Task cancellation chahiye
+Better testing chahiye
+Better error handling chahiye
+
+Kab Use Na Karein:
+Simple CRUD operations ke liye
+Small applications mein
+Jab team ko generators ka knowledge nahi hai
 
 3. RTK Query (Redux Toolkit):
 Redux Saga ek aur middleware hai jo generators ke through complex side effects ko handle karta hai. Ye advanced projects ke liye best hai.

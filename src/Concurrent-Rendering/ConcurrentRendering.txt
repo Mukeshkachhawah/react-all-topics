@@ -40,3 +40,14 @@ function ConcurrentExample() {
 }
 
 export default ConcurrentExample;
+
+
+Pehle kya hota tha:
+React 18 se pehle, jab bhi koi update hota tha, tab React pure UI tree ko ek saath process karta tha. Isse app slow ho jata tha, especially bade updates mein.
+
+Ab kya hota hai (Concurrent Rendering):
+React ab rendering ko beech mein rok sakta hai, continue kar sakta hai, ya chord bhi sakta hai
+Multiple UI versions pe parallel mein kaam kar sakta hai
+Main thread ko block nahi karta
+Naye features jaise Suspense aur transitions ko support karta hai
+

@@ -63,7 +63,6 @@ Controlled components me data React ke state se control hota hai, aur uncontroll
 Nuksan:
 State ke sath sync nahi hota, isse data manage karna mushkil ho sakta hai.
 
-
 Jab use karna hai:
 Controlled components jab data ko React ke state se control karna hai aur form validation aur input processing asaan hona chahiye, tab use karna hai.
 Uncontrolled components jab custom logic implement karna hai aur form submission aur validation ke liye asaan implementation chahiye, tab use karna hai.

@@ -1,0 +1,23 @@
+Custom Hook Kya Hai?
+1.Ye ek normal JavaScript function hai jo "use" se start hota hai (like useCounter, useFetch)
+2.Isme React ke built-in hooks (useState, useEffect, etc.) ka use kar sakte hain
+3.Logic ko reuse karne ka best tarika hai
+
+Kab Use Karein?
+1.API Calls ke liye:
+2.Form Handling ke liye:
+3.Local Storage ke liye:
+
+
+Custom Hooks Ka Fayda:
+1.Code reusability badhta hai
+2.Component logic clean rehti hai
+3.Testing easy ho jati hai
+4.Code maintenance aasan hota hai
+
+Best Practices:
+
+1.Hook ka naam 'use' se start karein
+2.Ek hook ek specific task ke liye banayein
+3.Dependencies clear rakhe
+4.Error handling implement karein
