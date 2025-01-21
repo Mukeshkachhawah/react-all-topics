@@ -1,4 +1,4 @@
-1. Basic Authentication (Username & Password)
+1. Basic Authentication (Username & Password):
 Description: Simple authentication system jisme user apna username aur password deta hai. Backend ko request bheji jati hai, aur agar credentials match karte hain toh access diya jata hai.
 
 Flow:
@@ -13,7 +13,7 @@ Security Considerations: Token ko securely store karna zaroori hota hai, usually
 Description: JWT ek popular method hai authentication ke liye. User ko login karne ke baad ek JWT token diya jata hai, jo aage ki requests ke liye use hota hai.
 
 Flow:
-1.User login karta hai.
+1.User login karta hai. 
 2.Backend JWT token generate karta hai aur frontend ko bhejta hai.
 3.Frontend us token ko localStorage ya sessionStorage mein store karta hai.
 4.Har request mein token ko headers mein send kiya jata hai backend ko for authentication.

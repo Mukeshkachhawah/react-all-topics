@@ -1,0 +1,24 @@
+HOC ek advanced pattern hai React mein. Simple words mein - HOC ek aisa function hai jo ek component ko input leta hai aur ek naya enhanced component return karta hai.
+
+Basic syntax aise hota hai:
+// HOC ka basic structure
+const withExtraProps = (WrappedComponent) => {
+    return function NewComponent(props) {
+        return <WrappedComponent extraProp="value" {...props} />;
+    }
+}
+
+HOC ke main fayde:
+
+Code reusability badhta hai
+Component logic ko share karna easy ho jata hai
+Cross-cutting concerns (jaise authentication, logging) ko handle karna easy hota hai
+
+Important points:
+
+HOC ka naam hamesha 'with' se start karna chahiye (convention)
+Original component ke props ko spread karna na bhoolein
+Multiple HOCs ko compose kar sakte hain
+Pure function hona chahiye - side effects nahi hone chahiye
+
+Modern React mein Hooks ke aane ke baad HOC ka use kam ho gaya hai, lekin abhi bhi bahut sari libraries HOC pattern use karti hain (jaise Redux ka connect, React Router ka withRouter).
